@@ -1,0 +1,425 @@
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { ArrowUpRight, MapPin, Phone, Clock, Mail, Sparkles } from "lucide-react";
+import heroStone from "@/assets/hero-stone.jpg";
+import showroom from "@/assets/showroom.jpg";
+import silestone from "@/assets/material-silestone.jpg";
+import dekton from "@/assets/material-dekton.jpg";
+import natural from "@/assets/material-natural.jpg";
+import bath from "@/assets/bath-studio.jpg";
+import atelier from "@/assets/atelier.jpg";
+
+const Nav = () => {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <header
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-700 ${
+        scrolled
+          ? "bg-background/85 backdrop-blur-xl border-b border-border/60 py-4"
+          : "bg-transparent py-7"
+      }`}
+    >
+      <div className="container-luxe flex items-center justify-between">
+        <a href="#top" className="flex items-baseline gap-2">
+          <span className="font-serif text-2xl tracking-tight">Cosentino</span>
+          <span className="eyebrow !text-[10px]">Center · Anaheim</span>
+        </a>
+        <nav className="hidden md:flex items-center gap-10 text-sm">
+          {["Materials", "Experience", "Atelier", "Visit"].map((l) => (
+            <a
+              key={l}
+              href={`#${l.toLowerCase()}`}
+              className="underline-grow text-foreground/80 hover:text-foreground transition-colors"
+            >
+              {l}
+            </a>
+          ))}
+        </nav>
+        <a href="#visit">
+          <Button variant="default" size="sm" className="rounded-none px-6 bg-ink text-ivory hover:bg-ink/90">
+            Book a Visit
+          </Button>
+        </a>
+      </div>
+    </header>
+  );
+};
+
+const Hero = () => (
+  <section id="top" className="relative h-screen min-h-[720px] w-full overflow-hidden">
+    <img
+      src={heroStone}
+      alt="Luxury Silestone marble countertop in modern kitchen at the Cosentino Center Anaheim showroom"
+      className="absolute inset-0 h-full w-full object-cover animate-slow-zoom"
+      width={1920}
+      height={1080}
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/20 to-ink/90" />
+    <div className="relative container-luxe h-full flex flex-col justify-end pb-24 text-ivory">
+      <div className="max-w-3xl space-y-8 fade-up">
+        <div className="flex items-center gap-3 eyebrow !text-ivory/70">
+          <span className="h-px w-12 bg-gold" />
+          Anaheim · Since 2010
+        </div>
+        <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-balance">
+          Surfaces of <em className="text-gold not-italic">distinction,</em><br/>shaped for the visionary.
+        </h1>
+        <p className="text-lg md:text-xl text-ivory/75 max-w-xl font-light leading-relaxed">
+          A 50,000 sq ft flagship for Silestone®, Dekton® and natural stone — where architects, designers
+          and homeowners meet the future of surface.
+        </p>
+        <div className="flex flex-wrap gap-4 pt-4">
+          <a href="#materials">
+            <Button size="lg" className="rounded-none bg-ivory text-ink hover:bg-gold hover:text-ink h-14 px-8 text-sm tracking-widest uppercase">
+              Explore Materials
+            </Button>
+          </a>
+          <a href="#visit">
+            <Button size="lg" variant="outline" className="rounded-none border-ivory/40 bg-transparent text-ivory hover:bg-ivory hover:text-ink h-14 px-8 text-sm tracking-widest uppercase">
+              Visit the Showroom <ArrowUpRight className="ml-2 h-4 w-4" />
+            </Button>
+          </a>
+        </div>
+      </div>
+      <div className="absolute bottom-10 right-12 hidden lg:flex flex-col items-end gap-2 text-ivory/60 text-xs uppercase tracking-[0.3em]">
+        <span>Scroll</span>
+        <span className="h-16 w-px bg-ivory/30" />
+      </div>
+    </div>
+  </section>
+);
+
+const Marquee = () => (
+  <div className="relative overflow-hidden border-y border-border bg-ivory py-6">
+    <div className="marquee flex gap-16 whitespace-nowrap font-serif text-3xl md:text-4xl text-foreground/70">
+      {Array.from({ length: 2 }).map((_, i) => (
+        <div key={i} className="flex gap-16 shrink-0">
+          {["Silestone®", "Dekton®", "Sensa®", "Scalea®", "Prexury®", "C·Bath", "Atelier"].map((m) => (
+            <span key={m} className="flex items-center gap-16">
+              {m}
+              <span className="text-gold">✦</span>
+            </span>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const Intro = () => (
+  <section className="container-luxe py-32 md:py-44 grid md:grid-cols-12 gap-12">
+    <div className="md:col-span-4 md:sticky md:top-32 self-start space-y-4">
+      <div className="eyebrow flex items-center gap-3"><span className="h-px w-8 bg-gold"/>Chapter 01</div>
+      <h2 className="font-serif text-4xl md:text-5xl leading-tight">
+        The first U.S. flagship.
+      </h2>
+    </div>
+    <div className="md:col-span-7 md:col-start-6 space-y-8 text-lg leading-relaxed text-foreground/80 font-light">
+      <p className="text-2xl md:text-3xl font-serif text-foreground leading-snug text-balance">
+        Opened in 2010, Cosentino Center Anaheim set the template for a new kind of design destination in
+        North America — part archive, part atelier, part laboratory.
+      </p>
+      <p>
+        Set across more than 50,000 square feet on Cerritos Avenue, the Center brings together a
+        logistics warehouse, a museum-grade slab gallery, a live demonstration kitchen, and dedicated
+        studios for kitchen and bath design. It is a place where ideas are pulled from raw stone and
+        engineered surface alike.
+      </p>
+      <p>
+        Trade professionals and homeowners from across Orange County and Greater Los Angeles arrive to
+        select full slabs of <em className="text-gold not-italic">Silestone®</em>, the ultracompact
+        precision of <em className="text-gold not-italic">Dekton®</em>, and a curated collection of
+        natural stone — guided by a team that has set the global standard for surface for half a century.
+      </p>
+    </div>
+  </section>
+);
+
+type Material = { name: string; tag: string; desc: string; img: string };
+const materials: Material[] = [
+  { name: "Silestone®", tag: "Hybrid mineral surface", desc: "A revolutionary mineral hybrid — luminous, durable, and crafted with HybriQ® technology for the most exacting interiors.", img: silestone },
+  { name: "Dekton®", tag: "Ultracompact surface", desc: "Engineered for façades, flooring, and kitchens. Heat, UV, and scratch resistant — virtually limitless in scale.", img: dekton },
+  { name: "Natural Stone", tag: "Earth, exclusively", desc: "A living archive of marble, granite and quartzite slabs hand-selected from quarries around the world.", img: natural },
+];
+
+const Materials = () => (
+  <section id="materials" className="bg-ink text-ivory py-32 md:py-44">
+    <div className="container-luxe">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+        <div className="space-y-4 max-w-2xl">
+          <div className="eyebrow !text-ivory/60 flex items-center gap-3"><span className="h-px w-8 bg-gold"/>The Collection</div>
+          <h2 className="font-serif text-5xl md:text-6xl leading-[1] text-balance">
+            Three families. <em className="text-gold not-italic">Infinite</em> possibility.
+          </h2>
+        </div>
+        <p className="text-ivory/60 max-w-md font-light">
+          From hybrid minerals to ultracompact surface and the deep memory of natural stone — every slab
+          on display has been chosen for its capacity to elevate.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+        {materials.map((m, i) => (
+          <article key={m.name} className="group hover-lift">
+            <div className="image-reveal aspect-[4/5] relative">
+              <img src={m.img} alt={`${m.name} slab sample`} loading="lazy" className="h-full w-full object-cover" />
+              <span className="absolute top-5 left-5 text-[10px] uppercase tracking-[0.3em] text-ivory/80 bg-ink/40 backdrop-blur px-3 py-1.5">
+                0{i + 1}
+              </span>
+            </div>
+            <div className="pt-8 space-y-3 border-t border-ivory/15 mt-6">
+              <div className="flex items-center justify-between">
+                <h3 className="font-serif text-3xl">{m.name}</h3>
+                <ArrowUpRight className="h-5 w-5 text-gold opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <p className="eyebrow !text-gold">{m.tag}</p>
+              <p className="text-ivory/70 font-light leading-relaxed pt-2">{m.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+type Stat = { v: string; l: string };
+const stats: Stat[] = [
+  { v: "50,000", l: "Square feet" },
+  { v: "2010", l: "Year established" },
+  { v: "1,500+", l: "Slabs in stock" },
+  { v: "4K", l: "Digital slab display" },
+];
+
+const Stats = () => (
+  <section className="container-luxe py-24 md:py-32 grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8 border-b border-border">
+    {stats.map((s) => (
+      <div key={s.l} className="space-y-2">
+        <div className="font-serif text-5xl md:text-6xl text-foreground">{s.v}</div>
+        <div className="eyebrow">{s.l}</div>
+      </div>
+    ))}
+  </section>
+);
+
+type Exp = { title: string; eyebrow: string; copy: string; img: string };
+const experiences: Exp[] = [
+  { eyebrow: "Atelier", title: "A studio for material thinking.", copy: "An immersive space where designers and architects compose mood, mock-ups and inspiration boards alongside Cosentino specialists.", img: atelier },
+  { eyebrow: "C·Bath Studio", title: "The bath, reimagined in stone.", copy: "Dedicated washbasins, shower trays and bath suites cut from a single, seamless surface — engineered for warmth and longevity.", img: bath },
+  { eyebrow: "Slab Gallery", title: "A museum of full slabs.", copy: "Walk among hundreds of slabs lit like artworks. The Digital Slab 4K display lets you preview every veining, every finish, at scale.", img: showroom },
+];
+
+const Experience = () => (
+  <section id="experience" className="container-luxe py-32 md:py-44">
+    <div className="max-w-3xl mb-20 space-y-4">
+      <div className="eyebrow flex items-center gap-3"><span className="h-px w-8 bg-gold"/>Inside the Center</div>
+      <h2 className="font-serif text-5xl md:text-6xl leading-[1] text-balance">
+        Five experiences, one address.
+      </h2>
+    </div>
+    <div className="space-y-32 md:space-y-40">
+      {experiences.map((e, i) => (
+        <div key={e.title} className={`grid md:grid-cols-12 gap-10 items-center ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
+          <div className="md:col-span-7 image-reveal aspect-[4/3]">
+            <img src={e.img} alt={e.title} loading="lazy" className="h-full w-full object-cover" />
+          </div>
+          <div className="md:col-span-4 md:col-start-9 space-y-5">
+            <div className="eyebrow !text-gold">{e.eyebrow}</div>
+            <h3 className="font-serif text-4xl md:text-5xl leading-tight">{e.title}</h3>
+            <p className="text-foreground/70 font-light leading-relaxed">{e.copy}</p>
+            <a href="#visit" className="inline-flex items-center gap-2 text-sm uppercase tracking-[0.25em] text-foreground border-b border-foreground/30 pb-1 hover:border-gold hover:text-gold transition-colors">
+              Discover <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+const Quote = () => (
+  <section className="relative bg-ivory py-32 md:py-44 overflow-hidden grain">
+    <div className="container-luxe relative">
+      <Sparkles className="h-8 w-8 text-gold mb-8" />
+      <blockquote className="font-serif text-3xl md:text-5xl lg:text-6xl leading-[1.1] max-w-5xl text-balance">
+        “Surface is the meeting point of architecture and intimacy.
+        At Anaheim, we treat every slab as a singular work — because
+        the spaces our clients build will outlive the trend that inspired them.”
+      </blockquote>
+      <div className="mt-12 flex items-center gap-4">
+        <span className="h-px w-12 bg-gold" />
+        <div>
+          <div className="font-medium">Sarah Mendoza</div>
+          <div className="eyebrow !text-foreground/50">Center Director, Anaheim</div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+type Service = { n: string; t: string; d: string };
+const services: Service[] = [
+  { n: "01", t: "Trade Partnership", d: "Dedicated account specialists for architects, designers, fabricators and kitchen-and-bath retailers." },
+  { n: "02", t: "Material Selection", d: "Private slab viewings, mock-up sessions and inspiration board development with our atelier team." },
+  { n: "03", t: "Façade Systems", d: "Specification support for ventilated façades and large-format Dekton® cladding for commercial projects." },
+  { n: "04", t: "Education & Events", d: "CEU-accredited training, demonstration kitchen sessions, and design-culture programming year-round." },
+];
+
+const Services = () => (
+  <section id="atelier" className="bg-ink text-ivory py-32 md:py-44">
+    <div className="container-luxe">
+      <div className="grid md:grid-cols-12 gap-12 mb-20">
+        <div className="md:col-span-5 space-y-4">
+          <div className="eyebrow !text-ivory/60 flex items-center gap-3"><span className="h-px w-8 bg-gold"/>For Professionals</div>
+          <h2 className="font-serif text-5xl md:text-6xl leading-[1]">A concierge for the trade.</h2>
+        </div>
+        <p className="md:col-span-5 md:col-start-8 self-end text-ivory/65 font-light">
+          The Anaheim Center exists to serve those who design and build at the highest level. Every
+          engagement is supported end-to-end by a team that understands specification as much as it
+          understands stone.
+        </p>
+      </div>
+      <div className="grid md:grid-cols-2 gap-px bg-ivory/10">
+        {services.map((s) => (
+          <div key={s.n} className="bg-ink p-10 md:p-14 group hover:bg-ink/60 transition-colors">
+            <div className="flex items-start justify-between mb-6">
+              <span className="font-serif text-xl text-gold">{s.n}</span>
+              <ArrowUpRight className="h-5 w-5 text-ivory/40 group-hover:text-gold transition-colors" />
+            </div>
+            <h3 className="font-serif text-3xl md:text-4xl mb-4">{s.t}</h3>
+            <p className="text-ivory/65 font-light leading-relaxed max-w-md">{s.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const FAQ = () => (
+  <section className="container-luxe py-32 md:py-44 grid md:grid-cols-12 gap-12">
+    <div className="md:col-span-4 space-y-4">
+      <div className="eyebrow flex items-center gap-3"><span className="h-px w-8 bg-gold"/>Considerations</div>
+      <h2 className="font-serif text-5xl leading-[1]">Frequently asked.</h2>
+    </div>
+    <div className="md:col-span-7 md:col-start-6">
+      <Accordion type="single" collapsible className="w-full">
+        {[
+          { q: "Is the Center open to homeowners?", a: "Yes. While we primarily serve the trade, homeowners are warmly welcome — and we recommend booking a private viewing for the most considered experience." },
+          { q: "Do you ship nationally?", a: "The Anaheim warehouse fulfills orders for Southern California fabricators and partners. National coordination is available through our Cosentino Center network." },
+          { q: "Can I bring my fabricator or designer?", a: "Absolutely — and we encourage it. Our specialists collaborate directly with your team during selection and specification." },
+          { q: "Do you host events and training?", a: "Yes — CEU sessions, demonstration kitchen evenings, and design-culture programming run throughout the year." },
+        ].map((f, i) => (
+          <AccordionItem key={i} value={`item-${i}`} className="border-border">
+            <AccordionTrigger className="font-serif text-2xl py-6 hover:no-underline hover:text-gold transition-colors">
+              {f.q}
+            </AccordionTrigger>
+            <AccordionContent className="text-foreground/70 font-light text-base leading-relaxed pb-6">
+              {f.a}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
+  </section>
+);
+
+const Visit = () => (
+  <section id="visit" className="relative bg-ink text-ivory py-32 md:py-44 overflow-hidden">
+    <img src={atelier} alt="" className="absolute inset-0 h-full w-full object-cover opacity-20" />
+    <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/85 to-ink" />
+    <div className="container-luxe relative grid md:grid-cols-12 gap-12">
+      <div className="md:col-span-7 space-y-8">
+        <div className="eyebrow !text-ivory/60 flex items-center gap-3"><span className="h-px w-8 bg-gold"/>Visit</div>
+        <h2 className="font-serif text-5xl md:text-7xl leading-[1] text-balance">
+          Compose your project, in person.
+        </h2>
+        <p className="text-ivory/70 font-light text-lg max-w-xl">
+          Reserve a private appointment with one of our specialists. We will prepare a curated selection
+          ahead of your visit, tailored to your project, palette and intent.
+        </p>
+        <a href="tel:+17145204100">
+          <Button size="lg" className="rounded-none bg-gold text-ink hover:bg-ivory h-14 px-10 text-sm tracking-widest uppercase">
+            Reserve a Viewing
+          </Button>
+        </a>
+      </div>
+      <aside className="md:col-span-4 md:col-start-9 space-y-8 border-t border-ivory/15 md:border-t-0 md:border-l md:pl-12 pt-12 md:pt-0">
+        {[
+          { i: MapPin, l: "Address", v: "611 E Cerritos Ave\nAnaheim, CA 92805" },
+          { i: Phone, l: "Telephone", v: "+1 (714) 520-4100" },
+          { i: Clock, l: "Hours", v: "Mon — Fri · 8:00 – 17:00\nSaturday by appointment" },
+          { i: Mail, l: "Trade Inquiries", v: "anaheim@cosentino.com" },
+        ].map(({ i: Icon, l, v }) => (
+          <div key={l} className="flex gap-4">
+            <Icon className="h-5 w-5 text-gold mt-1 shrink-0" />
+            <div className="space-y-1">
+              <div className="eyebrow !text-ivory/50">{l}</div>
+              <div className="text-ivory whitespace-pre-line font-light">{v}</div>
+            </div>
+          </div>
+        ))}
+      </aside>
+    </div>
+  </section>
+);
+
+const Footer = () => (
+  <footer className="bg-ivory border-t border-border">
+    <div className="container-luxe py-20 grid md:grid-cols-12 gap-12">
+      <div className="md:col-span-5 space-y-6">
+        <div className="font-serif text-4xl">Cosentino</div>
+        <p className="text-foreground/60 font-light max-w-sm">
+          The flagship Anaheim Center — pairing sustainable surface innovation with personalized,
+          expert technical support since 2010.
+        </p>
+      </div>
+      {[
+        { h: "Explore", l: ["Materials", "Experience", "Atelier", "Visit"] },
+        { h: "Network", l: ["Anaheim", "Dallas", "Phoenix", "Atlanta"] },
+        { h: "Contact", l: ["+1 (714) 520-4100", "611 E Cerritos Ave", "Anaheim, CA 92805"] },
+      ].map((c) => (
+        <div key={c.h} className="md:col-span-2 space-y-4">
+          <div className="eyebrow">{c.h}</div>
+          <ul className="space-y-2 font-light text-foreground/75 text-sm">
+            {c.l.map((x) => <li key={x}>{x}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div className="border-t border-border">
+      <div className="container-luxe py-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-foreground/50">
+        <span>© {new Date().getFullYear()} Cosentino Center Anaheim. All rights reserved.</span>
+        <span>Silestone®, Dekton® and Sensa® are registered trademarks of Cosentino S.A.</span>
+      </div>
+    </div>
+  </footer>
+);
+
+const Index = () => (
+  <main>
+    <Nav />
+    <Hero />
+    <Marquee />
+    <Intro />
+    <Materials />
+    <Stats />
+    <Experience />
+    <Quote />
+    <Services />
+    <FAQ />
+    <Visit />
+    <Footer />
+  </main>
+);
+
+export default Index;
